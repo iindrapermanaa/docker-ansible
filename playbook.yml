@@ -20,8 +20,11 @@
         stsate: present
     - name: create container
       docker_container:
+        recreate: yes
         name: docker_ansible
-        state: present
+        state: started
         image: "{{ image }}"
         exposed_ports:
+        - 8090:80
+        published_ports:
         - 8090:80
