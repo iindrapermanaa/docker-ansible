@@ -1,6 +1,6 @@
 - hosts: server
   vars:
-    image: iindrapermanaa/docker-ansible:beta
+    image: indra1992/docker-ansible:beta
   tasks:
     - name: install python-docker ubuntu
       apt:
@@ -23,5 +23,5 @@
         name: docker_ansible
         state: present
         image: "{{ image }}"
-        exposed_port:
+        exposed_ports:
         - 8090:80
