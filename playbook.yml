@@ -1,0 +1,27 @@
+- hosts: server
+  vars:
+    image: iindrapermanaa/docker-ansible:beta
+  tasks:
+    - name: install python-docker ubuntu
+      apt:
+        name: pyhton-docker
+        state: present
+      when:
+      - ansible_distribution == "Ubuntu"
+    - name: install python-docker centos
+      yum:
+        name: pyhton-docker
+        state: present
+      when:
+      - ansible_distribution == "CentOS"
+    - name: pull image
+      docker_image:
+        name: "{{ image }}"
+        stsate: present
+    - name: create container
+      docker_container:
+        name: docker_ansible
+        state: present
+        image: "{{ image }}"
+        exposed_port:
+        - 8090:80
